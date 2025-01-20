@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiosk Popup Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none; /* Disable text selection */
+        }
+
+        h1, p {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kiosk Mode Popup</h1>
+    <p>
+        This is an example of a kiosk-style popup window. The text here cannot be selected or copied.
+        Use this page to test behavior for kiosk applications or restricted environments.
+    </p>
+    <script>
+        // Automatically open a popup window when this page loads
+        window.onload = function() {
+            const kioskWindow = window.open(
+                "", // Empty string means a self-contained popup window
+                "KioskPopup", // Window name
+                "width=800,height=600,scrollbars=no,toolbar=no,menubar=no,resizable=no,status=no,top=100,left=100"
+            );
+
+            if (kioskWindow) {
+                // Write content to the popup window
+                kioskWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Kiosk Popup Content</title>
+                        <style>
+                            body {
+                                margin: 0;
+                                font-family: Arial, sans-serif;
+                                background-color: #f4f4f9;
+                                color: #333;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100vh;
+                                overflow: hidden;
+                                user-select: none; /* Disable text selection */
+                            }
+
+                            h1 {
+                                font-size: 2.5rem;
+                                margin-bottom: 1rem;
+                            }
+
+                            p {
+                                font-size: 1.25rem;
+                                max-width: 80%;
+                                line-height: 1.6;
+                                text-align: center;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Kiosk Popup Window</h1>
+                        <p>
+                            This is a self-contained popup window designed for kiosk mode testing.
+                            You cannot select or copy this text, and the browser's UI is hidden.
+                        </p>
+                    </body>
+                    </html>
+                `);
+                kioskWindow.document.close(); // Close the document stream to render the popup content
+            } else {
+                alert("Popup blocked! Please allow popups for this site to test.");
+            }
+        };
+
+        // Disable right-clicking on this page
+        document.addEventListener("contextmenu", (event) => event.preventDefault());
+    </script>
+</body>
+</html>
